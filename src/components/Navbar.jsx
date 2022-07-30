@@ -9,13 +9,13 @@ import avatar from '../data/avatar.jpg'
 import { Cart, Chat, Notification, UserProfile } from './'
 import { useStateContext } from '../contexts/ContextProvider'
 
-const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
+const NavButton = ({ title, customFunc, icon, color, dotColor, activeMenu }) => (
   <TooltipComponent content='title' position='BottomCenter'>
     <button 
       type='button' 
       onClick={customFunc} 
       style={{color}} 
-      className='relative text-xl rounded-full p-3 hover:bg-light-gray'
+      className={`relative text-xl rounded-full p-3 hover:bg-light-gray ${activeMenu ? 'hidden' : 'block'}`}
     >
       <span style={{background: dotColor}} className='absolute inline-flex rounded-full h-2 w-2 right-2 top-2' />
       {icon}
@@ -48,9 +48,10 @@ const Navbar = () => {
         title='Menu' 
         customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} 
         color={currentColor}
+        activeMenu={activeMenu}
         icon={<AiOutlineMenu />}
-       />
-       <div className='flex'>
+      />
+      <div className='flex'>
         <NavButton 
           title='Cart' 
           customFunc={() => handleClick('cart')} 
@@ -88,7 +89,7 @@ const Navbar = () => {
         { isClicked.chat && <Chat /> }
         { isClicked.notification && <Notification /> }
         { isClicked.userProfile && <UserProfile /> }
-       </div>
+      </div>
     </div>
   )
 }
