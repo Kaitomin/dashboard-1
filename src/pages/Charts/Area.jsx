@@ -30,8 +30,6 @@ const Area = () => {
         </SeriesCollectionDirective>
       </ChartComponent>
     </div>
-   
-
   )
 }
 
